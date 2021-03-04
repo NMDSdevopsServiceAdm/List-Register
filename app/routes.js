@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/enter-staff-details', function (req, res) {
-    res.render('enter-staff-details', { page: req.query.page })
-  })
+router.get('/:path/:page', function (req, res) {
+  res.render(`${req.params.path}/${req.params.page}`, { page: req.query.page })
+})
 
 module.exports = router
