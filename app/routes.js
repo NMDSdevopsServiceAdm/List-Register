@@ -6,6 +6,14 @@ const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
 
+router.get('/gov/:page', function (req, res) {
+  res.render(`gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+})
+
+router.get('/sfc/:page', function (req, res) {
+  res.render(`sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+})
+
 router.post('/file-upload', function (req, res) {
   
 })
@@ -25,10 +33,6 @@ router.get('/download/staff-contact-details', function (req, res) {
   staff.forEach(s => csvStream.write({...s, email: ''}));
 
   csvStream.end();
-})
-
-router.get('/:path/:page', function (req, res) {
-  res.render(`${req.params.path}/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true })
 })
 
 module.exports = router

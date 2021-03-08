@@ -7,6 +7,13 @@ module.exports = function (env) {
    */
   var filters = {}
 
+  filters.appendQuery = function(params, query) {
+    const newQuery = [];
+    for (const [key, value] of Object.entries({...query, ...params})) {
+      newQuery.push(`${key}=${value}`);
+    }
+    return "?" + newQuery.join("&");
+  }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

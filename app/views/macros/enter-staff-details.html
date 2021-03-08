@@ -1,4 +1,4 @@
-{% macro content(page, data, bulkUploadLink, showBulkUpload) %}
+{% macro content(data, bulkUploadLink, query) %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -7,7 +7,7 @@
       </h1>
       <p>Enter the email address or phone number for each member of staff to invite them to join the Adult Social Care Workforce Register.</p>
       <p><a href="#">What is the Adult Social Care Workforce Register?</a></p>
-      {% if showBulkUpload %}
+      {% if query.showBulkUpload %}
       <p><a href="{{ bulkUploadLink }}">Bulk upload staff contact details</a></p>
       {% endif %}
     </div>
@@ -22,33 +22,37 @@
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-          {% if not page %}
+          {% if not query.page %}
           {% set page = 1 %}
+          {% else %}
+          {% set page = query.page %}
           {% endif %}
+          {% set index = 1 %}
           {% for staff in (data['staff'][page]) %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">{{ staff['name'] }}</td>
               <td class="govuk-table__cell">{{ staff['title'] }}</td>
               <td  class="govuk-table__cell">
-                <input id="contact-email" class="govuk-input" id="registration-number" name="vehicle-registration" value="" type="text">
+                <input id="contact-email-{{ index }}" class="govuk-input" id="registration-number" name="vehicle-registration" value="" type="text">
               </td>
               <td class="govuk-table__cell">
-                <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" onclick="onClick(this)">
+                <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-index="{{ index }}" onclick="onClick(this)">
                   Save
                 </button>
               </td>
             </tr>
+            {% set index = index + 1 %}
           {% endfor %}
         </tbody>
       </table>
       <script>
-        function onClick(button) {
+        function onClick(button, index) {
           const newDiv = document.createElement("span");
           const newContent = document.createTextNode("Sent");
           newDiv.appendChild(newContent);
-          const buttonTd = button.parentNode;
-          buttonTd.replaceChild(newDiv, button);
-          const inputTd = buttonTd.parentNode.querySelector("#contact-email");
+          button.parentNode.replaceChild(newDiv, button);
+
+          const inputTd = document.getElementById(`contact-email-${button.dataset.index}`);
           const newDiv2 = document.createElement("span");
           const newContent2 = document.createTextNode(inputTd.value);
           newDiv2.appendChild(newContent2);
@@ -61,29 +65,29 @@
         <ul class="moj-pagination__list">
           {% if page > 1 %}
             <li class="moj-pagination__item moj-pagination__item--prev">
-              <a class="moj-pagination__link" href="?page={{ page - 1 }}">Previous page</a>
+              <a class="moj-pagination__link" href="{{ { page: +page - 1 } | appendQuery(query) }}">Previous page</a>
             </li>
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="?page=1">1</a></li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 1 } | appendQuery(query) }}">1</a></li>
           {% endif %}
           {% if page > 3 %}
             <li class="moj-pagination__item">...</li>
           {% endif %}
           {% if page > 2 %}
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="?page={{ page - 1 }}">{{ page - 1 }}</a></li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page - 1 } | appendQuery(query) }}">{{ page - 1 }}</a></li>
           {% endif %}
             <li class="moj-pagination__item moj-pagination__item--active">{{ page }}</li>
           {% if page < 14 %}
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="?page={{ +page + 1 }}">{{ +page + 1 }}</a></li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">{{ +page + 1 }}</a></li>
           {% endif %}
           {% if page < 12 %}
             <li class="moj-pagination__item">...</li>
           {% endif %}
           {% if page < 13 %}
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="?page=14">14</a></li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 14 } | appendQuery(query) }}">14</a></li>
           {% endif %}
           {% if page < 14 %}
             <li class="moj-pagination__item  moj-pagination__item--next">
-              <a class="moj-pagination__link" href="?page={{ +page + 1 }}">Next page</a>
+              <a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">Next page</a>
             </li>
           {% endif %}
         </ul>
