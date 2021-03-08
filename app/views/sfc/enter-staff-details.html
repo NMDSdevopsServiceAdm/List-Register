@@ -1,11 +1,10 @@
 {% extends "layout_sfc.html" %}
-{% import "macros/content.html" as content %}
+{% import "macros/enter-staff-details.html" as enterStaffDetails %}
 
 {% block pageTitle %}
   Start page example
 {% endblock %}
 
 {% block content %}
-
-{{ content.enterStaffDetails(page, data) }}
+{{ enterStaffDetails.content(page, data, '/sfc/bulk-upload', showBulkUpload) }}
 {% endblock %}

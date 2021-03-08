@@ -1,4 +1,4 @@
-{% macro enterStaffDetails(page, data) %}
+{% macro content(page, data, bulkUploadLink, showBulkUpload) %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -7,6 +7,9 @@
       </h1>
       <p>Enter the email address or phone number for each member of staff to invite them to join the Adult Social Care Workforce Register.</p>
       <p><a href="#">What is the Adult Social Care Workforce Register?</a></p>
+      {% if showBulkUpload %}
+      <p><a href="{{ bulkUploadLink }}">Bulk upload staff contact details</a></p>
+      {% endif %}
     </div>
     <div class="govuk-grid-column-full">
       <table class="govuk-table">
