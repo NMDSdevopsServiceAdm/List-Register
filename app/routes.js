@@ -1,26 +1,19 @@
 const path = require('path')
 const express = require('express')
 const router = express.Router()
+const NotifyClient = require('notifications-node-client').NotifyClient;
+const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 const csv = require('fast-csv');
-
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
 
 router.get('/gov/:page', function (req, res) {
   res.render(`gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
-})
+});
 
 router.get('/sfc/:page', function (req, res) {
   res.render(`sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
-})
-
-router.post('/file-upload', function (req, res) {
-  
-})
-
-router.get('/file-upload', function (req, res) {
-
-})
+});
 
 router.get('/download/staff-contact-details', function (req, res) {
   var csvStream = csv.format({ headers: true });
@@ -33,6 +26,21 @@ router.get('/download/staff-contact-details', function (req, res) {
   staff.forEach(s => csvStream.write({...s, email: ''}));
 
   csvStream.end();
-})
+});
+
+router.post('/email/invite', async function (req, res) {
+  try {
+    await notify.sendEmail('a111f463-05fb-4e1f-aec1-9532eff41cc4', req.body.email, {
+      personalisation: {
+        name: req.body.name
+      }
+    });
+  }
+  catch (ex) {}
+  finally
+  {
+    res.send();
+  }
+});
 
 module.exports = router

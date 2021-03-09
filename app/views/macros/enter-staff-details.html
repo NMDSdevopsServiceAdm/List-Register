@@ -30,10 +30,10 @@
           {% set index = 1 %}
           {% for staff in (data['staff'][page]) %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">{{ staff['name'] }}</td>
+              <td id="contact-name-{{ index }}" class="govuk-table__cell">{{ staff['name'] }}</td>
               <td class="govuk-table__cell">{{ staff['title'] }}</td>
               <td  class="govuk-table__cell">
-                <input id="contact-email-{{ index }}" class="govuk-input" id="registration-number" name="vehicle-registration" value="" type="text">
+                <input id="contact-email-{{ index }}" class="govuk-input" id="registration-number" name="vehicle-registration" type="text">
               </td>
               <td class="govuk-table__cell">
                 <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-index="{{ index }}" onclick="onClick(this)">
@@ -57,6 +57,18 @@
           const newContent2 = document.createTextNode(inputTd.value);
           newDiv2.appendChild(newContent2);
           inputTd.parentNode.replaceChild(newDiv2, inputTd);
+
+          const nameTd = document.getElementById(`contact-name-${button.dataset.index}`);
+
+          $.ajax({
+            type: "POST",
+            url: "/email/invite",
+            data: {
+              email: inputTd.value,
+              name: nameTd.innerText
+            },
+            dataType: "application/json"
+          });
         }
       </script>
       <nav class="moj-pagination" id="pagination-label">
