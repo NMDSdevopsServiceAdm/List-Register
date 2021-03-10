@@ -30,9 +30,12 @@ router.get('/download/staff-contact-details', function (req, res) {
 
 router.post('/email/invite', async function (req, res) {
   try {
+    const sfc = req.body.sfc == 'true';
     await notify.sendEmail('a111f463-05fb-4e1f-aec1-9532eff41cc4', req.body.email, {
       personalisation: {
-        name: req.body.name
+        name: req.body.name,
+        sfc: sfc ? 'yes' : 'no',
+        gov: sfc ? 'no' : 'yes'
       }
     });
   }

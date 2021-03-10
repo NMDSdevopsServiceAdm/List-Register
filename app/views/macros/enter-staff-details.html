@@ -1,4 +1,4 @@
-{% macro content(data, bulkUploadLink, query) %}
+{% macro content(data, bulkUploadLink, query, sfc) %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -37,7 +37,7 @@
               </td>
               <td class="govuk-table__cell">
                 <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-index="{{ index }}" onclick="onClick(this)">
-                  Save
+                  Send
                 </button>
               </td>
             </tr>
@@ -45,6 +45,15 @@
           {% endfor %}
         </tbody>
       </table>
+      {% if sfc %}
+      <script>
+        const sfc = true;
+      </script>
+      {% else %}
+      <script>
+        const sfc = false;
+      </script>
+      {% endif %}
       <script>
         function onClick(button, index) {
           const newDiv = document.createElement("span");
@@ -65,7 +74,8 @@
             url: "/email/invite",
             data: {
               email: inputTd.value,
-              name: nameTd.innerText
+              name: nameTd.innerText,
+              sfc
             },
             dataType: "application/json"
           });
