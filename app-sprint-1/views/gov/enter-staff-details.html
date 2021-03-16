@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% import "macros/enter-staff-details.html" as enterStaffDetails %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block content %}
+{{ enterStaffDetails.content(data, '/gov/bulk-upload', query, false) }}
+{% endblock %}

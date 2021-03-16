@@ -1,0 +1,24 @@
+
+.drag-and-drop-upload {
+    border: none !important;
+    border-radius: 0px;
+    outline: 3px dashed #0b0c0c;
+    padding: 0px 40px;
+    transition: outline-offset 0.1s ease-in-out, background-color 0.1s linear;
+    display: flex;
+    align-items: center;
+    height: 180px;
+    background: #fff;
+    cursor: pointer;
+    color: #717386;
+    border: 2px dashed #717386;
+    border-radius: 5px;
+    font-size: 16px;
+    overflow-x: auto;
+  }
+  .govuk-list--download > li {
+    min-height: 26px;
+    padding-left: 35px;
+    margin-bottom: 15px;
+    background: url("/public/images/icon-download.svg") no-repeat 0 0;
+  }
