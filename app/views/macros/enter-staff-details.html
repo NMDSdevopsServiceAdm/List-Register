@@ -15,10 +15,9 @@
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Name/ID number</th>
-            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Job role</th>
-            <th scope="col" class="govuk-table__header govuk-!-width-one-half">Email address</th>
-            <th scope="col" class="govuk-table__header"></th>
+            <th scope="col" class="govuk-table__header">Name/ID number</th>
+            <th scope="col" class="govuk-table__header">Job role</th>
+            <th scope="col" colspan="3" class="govuk-table__header">Email address or mobile phone number</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -30,15 +29,18 @@
           {% set index = 1 %}
           {% for staff in (data['staff'][page]) %}
             <tr class="govuk-table__row">
-              <td id="contact-name-{{ index }}" class="govuk-table__cell">{{ staff['name'] }}</td>
-              <td class="govuk-table__cell">{{ staff['title'] }}</td>
-              <td  class="govuk-table__cell">
-                <input id="contact-email-{{ index }}" class="govuk-input" id="registration-number" name="vehicle-registration" type="text">
+              <td id="contact-name-{{ index }}" class="govuk-table__cell govuk-!-padding-top-3">{{ staff['name'] }}</td>
+              <td class="govuk-table__cell govuk-!-padding-top-3">{{ staff['title'] }}</td>
+              <td class="govuk-table__cell" style="width: 420px">
+                <input id="contact-email-{{ index }}" class="govuk-input" type="text">
               </td>
               <td class="govuk-table__cell">
-                <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-index="{{ index }}" onclick="onClick(this)">
-                  Send
+                <button class="govuk-button govuk-!-margin-bottom-0" data-index="{{ index }}" onclick="onClick(this)">
+                  Send invite
                 </button>
+              </td>
+              <td class="govuk-table__cell govuk-!-padding-top-3">
+                <a class="govuk-link" href="#" onclick="onDelete(this)">Delete</a>
               </td>
             </tr>
             {% set index = index + 1 %}
@@ -54,18 +56,42 @@
         const sfc = false;
       </script>
       {% endif %}
+      <template id="input-template">
+        <td class="govuk-table__cell" style="width: 420px">
+          <input class="govuk-input" type="text">
+        </td>
+      </template>
+      <template id="send-template">
+        <td class="govuk-table__cell">
+          <button class="govuk-button govuk-!-margin-bottom-0" data-index="" onclick="onClick(this)">
+            Send invite
+          </button>
+        </td>
+      </template>
+      <template id="change-template">
+        <td class="govuk-table__cell govuk-!-padding-top-3">
+          <a class="govuk-link" data-index="" onclick="onChange(this)" href="#">Change</a>
+        </td>
+      </template>
+      <template id="details-template">
+        <td class="govuk-table__cell govuk-!-padding-top-3" style="width: 420px">
+          <span id=""></span>
+        </td>
+      </template>
       <script>
-        function onClick(button, index) {
-          const newDiv = document.createElement("span");
-          const newContent = document.createTextNode("Sent");
-          newDiv.appendChild(newContent);
-          button.parentNode.replaceChild(newDiv, button);
+        function onClick(button) {
+          const changeTemplate = document.getElementById("change-template");
+          const changeNode = document.importNode(changeTemplate.content, true);
+          changeNode.querySelector('a').dataset.index = button.dataset.index;
+          button.parentNode.parentNode.replaceChild(changeNode, button.parentNode);
 
           const inputTd = document.getElementById(`contact-email-${button.dataset.index}`);
-          const newDiv2 = document.createElement("span");
-          const newContent2 = document.createTextNode(inputTd.value);
-          newDiv2.appendChild(newContent2);
-          inputTd.parentNode.replaceChild(newDiv2, inputTd);
+          const detailsTemplate = document.getElementById("details-template");
+          const detailsNode = document.importNode(detailsTemplate.content, true);
+          const item = detailsNode.querySelector('span');
+          item.id = `contact-email-${button.dataset.index}`
+          item.textContent = inputTd.value;
+          inputTd.parentNode.parentNode.replaceChild(detailsNode, inputTd.parentNode);
 
           const nameTd = document.getElementById(`contact-name-${button.dataset.index}`);
 
@@ -79,6 +105,25 @@
             },
             dataType: "application/json"
           });
+        }
+
+        function onChange(button) {
+          const sendTemplate = document.getElementById("send-template");
+          const sendNode = document.importNode(sendTemplate.content, true);
+          sendNode.querySelector('button').dataset.index = button.dataset.index;
+          button.parentNode.parentNode.replaceChild(sendNode, button.parentNode);
+
+          const inputTd = document.getElementById(`contact-email-${button.dataset.index}`);
+          const inputTemplate = document.getElementById("input-template");
+          const inputNode = document.importNode(inputTemplate.content, true);
+          const item = inputNode.querySelector('input');
+          item.id = `contact-email-${button.dataset.index}`
+          item.value = inputTd.textContent;
+          inputTd.parentNode.parentNode.replaceChild(inputNode, inputTd.parentNode);
+        }
+
+        function onDelete(button) {
+          button.parentNode.parentNode.remove();
         }
       </script>
       <nav class="moj-pagination" id="pagination-label">
