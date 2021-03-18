@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% import "macros/enter-staff-details.html" as enterStaffDetails %}
+{% import "macros/enter-staff-details-b.html" as enterStaffDetailsB %}
 
 {% block pageTitle %}
   Start page example
@@ -11,5 +12,9 @@
 {% endblock %}
 
 {% block content %}
-{{ enterStaffDetails.content(data, '/gov/bulk-upload', query, false) }}
+{% if showB %}
+{{ enterStaffDetailsB.content(data, '/gov/bulk-upload', query, true, '/gov/start', '/gov/enter-staff-details') }}
+{% else %}
+{{ enterStaffDetails.content(data, '/gov/bulk-upload', query, true, '/gov/start', '/gov/enter-staff-details') }}
+{% endif %}
 {% endblock %}

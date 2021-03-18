@@ -1,10 +1,10 @@
 {% extends "layout_sfc.html" %}
-{% import "macros/bulk-upload.html" as bulkUpload %}
+{% import "macros/thank-you.html" as thankYou %}
 
 {% block pageTitle %}
   Start page example
 {% endblock %}
 
 {% block content %}
-{{ bulkUpload.content(back, showB) }}
+{{ thankYou.content() }}
 {% endblock %}

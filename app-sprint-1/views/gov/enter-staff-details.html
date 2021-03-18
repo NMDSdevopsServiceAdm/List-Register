@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import "macros/bulk-upload.html" as bulkUpload %}
+{% import "macros/enter-staff-details.html" as enterStaffDetails %}
 
 {% block pageTitle %}
   Start page example
@@ -11,5 +11,5 @@
 {% endblock %}
 
 {% block content %}
-{{ bulkUpload.content(back, showB) }}
+{{ enterStaffDetails.content(data, '/gov/bulk-upload', query, false) }}
 {% endblock %}
