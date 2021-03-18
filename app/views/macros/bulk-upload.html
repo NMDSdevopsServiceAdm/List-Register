@@ -1,6 +1,12 @@
-{% macro content(cancelLink) %}
+{% macro content(backLink, showB) %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+      {% if showB %}
+      <a href="{{ backLink }}?version=b" class="govuk-back-link" style="border-bottom: 0;">Back</a>
+      {% else %}
+      <a href="{{ backLink }}" class="govuk-back-link" style="border-bottom: 0;">Back</a>
+      {% endif %}
+        
       <h1 class="govuk-heading-l govuk-!-margin-bottom-4">Bulk upload staff contact details</h1>
       <p><a href="/download/staff-contact-details">Download your staff data file</a> and add the contact information in the file before you can do the bulk upload.</p>
       <div class="govuk-util__block">
@@ -35,8 +41,7 @@
           </tbody>
        </table>
       <div class="govuk-!-margin-top-6">
-          <button type="button" class="govuk-button govuk-!-margin-right-9"> Upload </button>
-          <a class="govuk-button--link" href="{{ cancelLink }}?showBulkUpload=true">Cancel</a>
+          <a href="/sfc/thank-you" class="govuk-button">Upload</a>
       </div>
   </div>
 </div>

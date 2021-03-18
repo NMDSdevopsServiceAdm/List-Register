@@ -1,6 +1,6 @@
-const { EOL } = require('os');
 const path = require('path')
 const express = require('express')
+const url = require('url');
 const router = express.Router()
 const NotifyClient = require('notifications-node-client').NotifyClient;
 const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
@@ -19,20 +19,25 @@ router.post('/sfc/start', function (req, res) {
 function redirect(req, res, path) {
   const choice = req.body['how-to-enter-staff-details'];
   if (choice === 'manually') {
-    res.redirect(`/${path}/enter-staff-details`);
+    res.redirect(url.format({
+      pathname: `/${path}/enter-staff-details`,
+      query: req.query
+    }));
   } else if (choice === 'bulk-upload') {
-    res.redirect(`/${path}/bulk-upload`);
+    res.redirect(`/${path}/bulk-upload?back=/${path}/start`);
   } else {
     res.status(400).send();
   }
 }
 
 router.get('/gov/:page', function (req, res) {
-  res.render(`gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+  const showB = req.query.version === 'b';
+  res.render(`gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
 });
 
 router.get('/sfc/:page', function (req, res) {
-  res.render(`sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+  const showB = req.query.version === 'b';
+  res.render(`sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
 });
 
 router.get('/download/staff-contact-details', function (req, res) {

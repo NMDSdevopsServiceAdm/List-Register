@@ -12,41 +12,48 @@
       </p>
     </div>
     <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header">Name/ID number</th>
-            <th scope="col" class="govuk-table__header">Job role</th>
-            <th scope="col" colspan="3" class="govuk-table__header">Email address or mobile phone number</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% if not query.page %}
-          {% set page = 1 %}
-          {% else %}
-          {% set page = query.page %}
-          {% endif %}
-          {% set index = 1 %}
-          {% for staff in (data['staff'][page]) %}
-            <tr class="govuk-table__row">
-              <td id="contact-name-{{ index }}" class="govuk-table__cell govuk-!-padding-top-3">{{ staff['name'] }}</td>
-              <td class="govuk-table__cell govuk-!-padding-top-3">{{ staff['title'] }}</td>
-              <td class="govuk-table__cell" style="width: 340px">
-                <input id="contact-email-{{ index }}" class="govuk-input" type="text">
-              </td>
-              <td class="govuk-table__cell">
-                <button class="govuk-button govuk-!-margin-bottom-0" data-index="{{ index }}" onclick="onClick(this)">
-                  Send invite
-                </button>
-              </td>
-              <td class="govuk-table__cell govuk-!-padding-top-3">
-                <a class="govuk-link" href="#" onclick="onDelete(this)">Delete</a>
-              </td>
-            </tr>
-            {% set index = index + 1 %}
-          {% endfor %}
-        </tbody>
-      </table>
+      {% if not query.page %}
+      {% set page = 1 %}
+      {% else %}
+      {% set page = query.page %}
+      {% endif %}
+      {% set index = 1 %}
+      {% for staff in (data['staffB'][page]) %}
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Name/ID number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ staff['name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Job role
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ staff['title'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Email or mobile number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <input id="contact-email-{{ index }}" class="govuk-input" type="text">
+            </dd>
+            <dd class="govuk-summary-list__actions" style="text-align: left">
+              <button class="govuk-button govuk-!-margin-bottom-0" style="top: -8px" data-index="{{ index }}" onclick="onClick(this)">
+                Send invite
+              </button>
+            </dd>
+          </div>
+        </dl>
+        {% set index = index + 1 %}
+      {% endfor %}
       {% if sfc %}
       <script>
         const sfc = true;
@@ -57,26 +64,26 @@
       </script>
       {% endif %}
       <template id="input-template">
-        <td class="govuk-table__cell" style="width: 340px">
+        <dd class="govuk-summary-list__value">
           <input class="govuk-input" type="text">
-        </td>
+        </dd>
       </template>
       <template id="send-template">
-        <td class="govuk-table__cell">
+        <dd class="govuk-summary-list__actions" style="text-align: left">
           <button class="govuk-button govuk-!-margin-bottom-0" data-index="" onclick="onClick(this)">
             Send invite
           </button>
-        </td>
+        </dd>
       </template>
       <template id="change-template">
-        <td class="govuk-table__cell govuk-!-padding-top-3">
+        <dd class="govuk-summary-list__actions" style="text-align: left">
           <a class="govuk-link" data-index="" onclick="onChange(this)" href="#">Change</a>
-        </td>
+        </dd>
       </template>
       <template id="details-template">
-        <td class="govuk-table__cell govuk-!-padding-top-3" style="width: 420px">
+        <dd class="govuk-summary-list__value">
           <span id=""></span>
-        </td>
+        </dd>
       </template>
       <script>
         function onClick(button) {
@@ -127,7 +134,7 @@
         }
       </script>
       <nav class="moj-pagination" id="pagination-label">
-        <p class="moj-pagination__results">Showing <b>{{ 15 * (page - 1) + 1 }} - {{ 15 * (page - 1) + 15 }}</b> of <b>200</b></p>
+        <p class="moj-pagination__results">Showing <b>{{ 6 * (page - 1) + 1 }} - {{ 6 * (page - 1) + 6 }}</b> of <b>204</b></p>
         
         <ul class="moj-pagination__list">
           {% if page > 1 %}
@@ -143,16 +150,16 @@
             <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page - 1 } | appendQuery(query) }}">{{ page - 1 }}</a></li>
           {% endif %}
             <li class="moj-pagination__item moj-pagination__item--active">{{ page }}</li>
-          {% if page < 14 %}
+          {% if page < 34 %}
             <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">{{ +page + 1 }}</a></li>
           {% endif %}
-          {% if page < 12 %}
+          {% if page < 32 %}
             <li class="moj-pagination__item">...</li>
           {% endif %}
-          {% if page < 13 %}
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 14 } | appendQuery(query) }}">14</a></li>
+          {% if page < 33 %}
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 34 } | appendQuery(query) }}">34</a></li>
           {% endif %}
-          {% if page < 14 %}
+          {% if page < 34 %}
             <li class="moj-pagination__item  moj-pagination__item--next">
               <a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">Next page</a>
             </li>
