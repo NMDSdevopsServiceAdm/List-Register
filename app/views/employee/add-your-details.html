@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" novalidate>
+            <div class="govuk-form-group">
+                <span class="govuk-caption-l">Join the Adult Social Care Workforce Register</span>
+                <h1 class="govuk-heading-l">
+                    Add your details
+                </h1>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="event-name">
+                    Full name
+                  </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="full-name" name="full-name" type="text" value="{{ data['full-name'] }}">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="sort">
+                    Main job role
+                </label>
+                <div id="passport-issued-hint" class="govuk-hint">
+                    Choose one that best describes the type of work you do
+                  </div>
+                {% set options = ['Associate Care Worker', 'Care Worker', 'Registered Manager', 'Research Nurse'] %}
+                <select class="govuk-select govuk-!-width-two-thirds" id="job-role" name="job-role">
+                    <option disabled selected>Select main job role</option>
+                    {% for option in options %}
+                    <option {% if option == data['job-role'] %}selected{% endif %} value="{{ option }}">{{ option }}</option>                    
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
