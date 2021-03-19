@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <span class="govuk-caption-l">Join the Adult Social Care Workforce Register</span>
+                    <h1 class="govuk-fieldset__heading">
+                        How would you like us to contact you?
+                    </h1>
+                  </legend>
+                  <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="contact" name="contact" type="radio" value="email" {% if data['contact'] == 'email' %}checked{% endif %} data-aria-controls="conditional-contact">
+                      <label class="govuk-label govuk-radios__label" for="contact">
+                        Email
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact">
+                        <p class="govuk-body">You will need to be able to access to this email address to update your details in the future.</p>
+                        <p><strong>Continue with same email address email.address@email.com</strong></p>
+                        <p>Or use a new email address.</p>
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="contact-by-email">
+                            Enter new email
+                            </label>
+                            <input class="govuk-input govuk-!-width-two-thirds" id="contact-by-email" name="contact-by-email" type="email" value="{{ data['contact-by-email'] }}">
+                        </div>
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="contact-by-email">
+                            Confirm new email
+                            </label>
+                            <input class="govuk-input govuk-!-width-two-thirds" id="contact-by-email-confirm" name="contact-by-email-confirm" type="email" value="{{ data['contact-by-email-confirm'] }}">
+                        </div>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="contact-3" name="contact" type="radio" value="text" {% if data['contact'] == 'text' %}checked{% endif %} data-aria-controls="conditional-contact-3">
+                      <label class="govuk-label govuk-radios__label" for="contact-3">
+                        Text message (SMS)
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact-3">
+                      <div class="govuk-form-group">
+                        <label class="govuk-label" for="contact-by-text">
+                          Enter mobile number
+                        </label>
+                        <input class="govuk-input govuk-!-width-one-half" id="contact-by-text" name="contact-by-text" type="tel" value="{{ data['contact-by-text'] }}">
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

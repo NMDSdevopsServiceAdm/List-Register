@@ -8,6 +8,18 @@ const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
 
+router.post('/employee/add-your-details', function (req, res) {
+  res.redirect('/employee/how-to-contact-you');
+});
+
+router.post('/employee/how-to-contact-you', function (req, res) {
+  res.redirect('/employee/confirm-your-details');
+});
+
+router.post('/employee/confirm-your-details', function (req, res) {
+  res.redirect('/employee/thank-you');
+});
+
 router.post('/gov/start', function (req, res) {
   redirect(req, res, 'gov');
 });
