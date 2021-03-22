@@ -10,23 +10,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <div class="govuk-panel govuk-panel--confirmation">
-          <h1 class="govuk-panel__title">
-            Thank you for joining the Adult Social Care Workforce Register (ASC-Workforce Register)
-          </h1>
+<a href="{{ data['figma'] }}" style="text-decoration: none;">
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+              Thank you for joining the Adult Social Care Workforce Register (ASC-Workforce Register)
+            </h1>
+          </div>
+          <h2 class="govuk-heading-m govuk-!-margin-top-8">What happens now?</h2>
+          <p class="govuk-body">
+              You will receive a welcome email, with a downloadable certificate, confirming you are now a member of the ASC-Workforce Register.
+          </p>
+          <p class="govuk-body">
+              In 6 months time we will also ask you to reconfirm your details.
+          </p>
+          <p class="govuk-body govuk-!-margin-top-8">
+              <a href="#" class="govuk-link">Contact us</a> if you have any questions about your account.
+          </p>
         </div>
-        <h2 class="govuk-heading-m govuk-!-margin-top-8">What happens now?</h2>
-        <p class="govuk-body">
-            You will receive a welcome email, with a downloadable certificate, confirming you are now a member of the ASC-Workforce Register.
-        </p>
-        <p class="govuk-body">
-            In 6 months time we will also ask you to reconfirm your details.
-        </p>
-        <p class="govuk-body govuk-!-margin-top-8">
-            <a href="#" class="govuk-link">Contact us</a> if you have any questions about your account.
-        </p>
-      </div>
-</div>
+  </div>
+</a>
 {% endblock %}

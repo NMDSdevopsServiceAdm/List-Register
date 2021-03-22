@@ -10,11 +10,12 @@ const staff = data.staff.flat();
 
 router.get('/employee/:page', function (req, res) {
   const version = req.query.version;
+  const figma = req.query.figma;
   let path = `employee/${req.params.page}`;
   if (req.params.page === 'start' && version === 'a') {
     path += '-version-a';
   }
-  res.render(path, { version })
+  res.render(path, { version, figma })
 })
 
 router.post('/employee/start', function (req, res) {
