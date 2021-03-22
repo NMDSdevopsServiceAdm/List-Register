@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros/sub-heading.html" as subHeading %}
 
 {% block pageTitle %}
   Start page example
@@ -13,26 +14,24 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form method="post" novalidate>
+            <span class="govuk-caption-l">{{ subHeading.content(data['version']) }}</span>
+            <h1 class="govuk-heading-l">
+                Add your details
+            </h1>
             <div class="govuk-form-group">
-                <span class="govuk-caption-l">Join the Adult Social Care Workforce Register</span>
-                <h1 class="govuk-heading-l">
-                    Add your details
-                </h1>
-            </div>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="event-name">
+                <label class="govuk-label" for="full-name">
                     Full name
                   </label>
                 <input class="govuk-input govuk-!-width-two-thirds" id="full-name" name="full-name" type="text" value="{{ data['full-name'] }}">
             </div>
             <div class="govuk-form-group">
-                <label class="govuk-label" for="sort">
+                <label class="govuk-label" for="job-role">
                     Main job role
                 </label>
                 <div id="passport-issued-hint" class="govuk-hint">
                     Choose one that best describes the type of work you do
                   </div>
-                {% set options = ['Associate Care Worker', 'Care Worker', 'Registered Manager', 'Research Nurse'] %}
+                {% set options = ['Senior Management', 'Middle Management', 'First Line Management', 'Registered Manager', 'Supervisor', 'Social Worker', 'Senior Care Worker', 'Care Worker', 'Community, Support and Outreach Work', 'Employment Support', 'Advice, Guidance and Advocacy', 'Occupational Therapist', 'Registered Nurse', 'Allied Health Professional (not Occupational Therapist)', 'Technician', 'Other Job role directly involved in providing care', 'Managers and staff care –related but not care –providing', 'Administrative/Office staff not care-providing', 'Ancillary staff not care providing', 'Other job roles not directly involved in providing care', 'Activities worker or co-ordinator', 'Safeguarding & Reviewing Officer', 'Occupational Therapist Assistant', 'Nursing Associate', 'Nursing Assistant', 'Assessment Officer', 'Care Coordinator', 'Care Navigator', 'Any Children’s/young people’s job role (edited)'] %}
                 <select class="govuk-select govuk-!-width-two-thirds" id="job-role" name="job-role">
                     <option disabled selected>Select main job role</option>
                     {% for option in options %}

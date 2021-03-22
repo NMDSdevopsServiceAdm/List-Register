@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros/sub-heading.html" as subHeading %}
 
 {% block pageTitle %}
   Start page example
@@ -16,7 +17,8 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
                   <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <span class="govuk-caption-l">Join the Adult Social Care Workforce Register</span>
+
+                    <span class="govuk-caption-l">{{ subHeading.content(data['version']) }}</span>
                     <h1 class="govuk-fieldset__heading">
                         How would you like us to contact you?
                     </h1>
@@ -30,7 +32,7 @@
                     </div>
                     <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact">
                         <p class="govuk-body">You will need to be able to access to this email address to update your details in the future.</p>
-                        <p><strong>Continue with same email address email.address@email.com</strong></p>
+                        <p><strong>Continue with same email address name@email.com</strong></p>
                         <p>Or use a new email address.</p>
                         <div class="govuk-form-group">
                             <label class="govuk-label" for="contact-by-email">
@@ -62,6 +64,9 @@
                   </div>
                 </fieldset>
               </div>
+              {% if data['version'] == 'a' %}
+              <input type="hidden" name="version" value="a">
+              {% endif %}
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
