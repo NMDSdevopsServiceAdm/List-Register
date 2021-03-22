@@ -8,11 +8,32 @@ const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
 
+router.get('/employee/:page', function (req, res) {
+  const version = req.query.version;
+  let path = `employee/${req.params.page}`;
+  if (req.params.page === 'start' && version === 'a') {
+    path += '-version-a';
+  }
+  res.render(path, { version })
+})
+
+router.post('/employee/start', function (req, res) {
+  res.redirect('/employee/add-your-details');
+});
+
 router.post('/employee/add-your-details', function (req, res) {
   res.redirect('/employee/how-to-contact-you');
 });
 
 router.post('/employee/how-to-contact-you', function (req, res) {
+  if (req.body.version === 'a') {
+    res.redirect('/employee/your-employer-details');
+  } else {
+    res.redirect('/employee/confirm-your-details');
+  }
+});
+
+router.post('/employee/your-employer-details', function (req, res) {
   res.redirect('/employee/confirm-your-details');
 });
 
