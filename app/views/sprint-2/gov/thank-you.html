@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% import "sprint-2/macros/thank-you.html" as thankYou %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block content %}
+{{ thankYou.content() }}
+{% endblock %}

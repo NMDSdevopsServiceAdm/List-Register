@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% import "sprint-2/macros/sub-heading.html" as subHeading %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">{{ subHeading.content(data['version']) }}</span>
+        <h1 class="govuk-heading-l">
+            Confirm your details
+        </h1>
+                
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Full name</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Main job role</p>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{ data['full-name'] }}</p>
+                    <p class="govuk-body">{{ data['job-role'] }}</p>
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/employee/add-your-details">
+                    Change
+                </a>
+                </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Preferred method of contact</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">{% if data['contact'] == 'email' %}Email{% else %}Mobile number{% endif %}</p>                    
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['contact'] == 'email' %}Email{% else %}Text message (SMS){% endif %}</p>
+                    <p class="govuk-body">{% if data['contact'] == 'email' %}{{ data['contact-by-email'] }}{% else %}{{ data['contact-by-text'] }}{% endif %}</p>                    
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/employee/how-to-contact-you">
+                    Change<span class="govuk-visually-hidden"> contact details</span>
+                </a>
+                </dd>
+            </div>
+            
+            {% if data['version'] == 'a' %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Company name</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Postcode</p>                    
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{ data['company-name'] }}</p>
+                    <p class="govuk-body">{{ data['postcode'] }}</p>                    
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/employee/your-employer-details">
+                    Change
+                </a>
+                </dd>
+            </div>
+            {% endif %}
+        </dl>
+        <h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-0">Are these details correct?</h2>
+        <p class="govuk-body">You can update these details at any time.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds govuk-!-margin-top-6">
+        <form method="post" novalidate>
+
+            <div class="govuk-form-group">
+                <h2 class="govuk-heading-m">Give consent</h2>
+                <div class="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+                    <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0" for="waste">
+                        I agree to the Adult Social Care Workforce Register (ASC-Workforce Register) using this data to send me information and to the <a href="#">terms and conditions</a> of this service. You must agree to these before you can join the register.
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <div class="govuk-form-group govuk-!-margin-top-6">
+                <p class="govuk-body"><strong>We may also use the register to let you know about discounts you are eligible for as part of the adult social care workforce.</strong></p>
+                <div class="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+                    <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0" for="waste">
+                        I agree to the ASC-Workforce Register using this data to send me information for marketing purposes.
+                        <div class="govuk-hint">
+                            Optional
+                          </div>
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

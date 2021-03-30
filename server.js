@@ -22,7 +22,8 @@ const config = require('./app/config.js')
 const documentationRoutes = require('./docs/documentation_routes.js')
 const packageJson = require('./package.json')
 const routes = require('./app/routes.js')
-const routesSprint1 = require('./app-sprint-1/routes.js')
+const routesSprint1 = require('./app/routes-sprint-1.js')
+const routesSprint2 = require('./app/routes-sprint-2.js')
 const utils = require('./lib/utils.js')
 const extensions = require('./lib/extensions/extensions.js')
 
@@ -77,7 +78,6 @@ middleware.forEach(func => app.use(func))
 // Set up App
 var appViews = extensions.getAppViews([
   path.join(__dirname, '/app/views/'),
-  path.join(__dirname, '/app-sprint-1/views/'),
   path.join(__dirname, '/lib/')
 ])
 
@@ -247,6 +247,13 @@ if (typeof (routesSprint1) !== 'function') {
   routesSprint1.bind(app)
 } else {
   app.use('/sprint-1/', routesSprint1)
+}
+if (typeof (routesSprint2) !== 'function') {
+  console.log(routesSprint2.bind)
+  console.log('Warning: the use of bind in routes is deprecated - please check the Prototype Kit documentation for writing routes.')
+  routesSprint2.bind(app)
+} else {
+  app.use('/sprint-2/', routesSprint2)
 }
 
 if (useDocumentation) {
