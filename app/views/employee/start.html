@@ -29,6 +29,7 @@
         <h2 class="govuk-heading-m">What will we use this data for?</h2>
         <p class="govuk-body">We will only use these contact details to send you information. They will not be used for any other purpose and we will not share them with anyone else.</p>
         <form method="post">
+          <input name="contact-by-email" type="hidden" value="{{ email }}">
           <input type="hidden" name="version" value="b">
           <input type="hidden" name="figma" value="{{ figma }}">
           <button class="govuk-button govuk-button--start govuk-!-margin-top-6">
