@@ -1,0 +1,15 @@
+{% extends "layout_sfc.html" %}
+{% import "sprint-2/macros/enter-staff-details.html" as enterStaffDetails %}
+{% import "sprint-2/macros/enter-staff-details-b.html" as enterStaffDetailsB %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block content %}
+{% if showB %}
+{{ enterStaffDetailsB.content(data, '/sprint-2/sfc/bulk-upload', query, true, '/sprint-2/sfc/start', '/sprint-2/sfc/enter-staff-details') }}
+{% else %}
+{{ enterStaffDetails.content(data, '/sprint-2/sfc/bulk-upload', query, true, '/sprint-2/sfc/start', '/sprint-2/sfc/enter-staff-details') }}
+{% endif %}
+{% endblock %}

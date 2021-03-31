@@ -1,0 +1,10 @@
+{% extends "layout_sfc.html" %}
+{% import "sprint-1/macros/bulk-upload.html" as bulkUpload %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block content %}
+{{ bulkUpload.content('/sprint-1/sfc/enter-staff-details') }}
+{% endblock %}

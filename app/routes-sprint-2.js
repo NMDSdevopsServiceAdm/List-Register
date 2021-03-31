@@ -7,13 +7,14 @@ const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
+const prefix = 'sprint-2'
 
 router.get('/employee/start', function (req, res) {
   req.session.data = {};
   const version = req.query.version;
   const figma = req.query.figma;
   const email = req.query.email ?? 'name@email.com';
-  let path = 'employee/start';
+  let path = `${prefix}/employee/start`;
   if (version === 'a') {
     path += '-version-a';
   }
@@ -21,7 +22,7 @@ router.get('/employee/start', function (req, res) {
 });
 
 router.get('/employee/how-to-contact-you', function (req, res) {
-  let path = 'employee/how-to-contact-you';
+  let path = `${prefix}/employee/how-to-contact-you`;
   if (req.session.data.version === 'b') {
     path += '-version-b';
   }
@@ -29,27 +30,27 @@ router.get('/employee/how-to-contact-you', function (req, res) {
 });
 
 router.post('/employee/start', function (req, res) {
-  res.redirect('/employee/add-your-details');
+  res.redirect(`/${prefix}/employee/add-your-details`);
 });
 
 router.post('/employee/add-your-details', function (req, res) {
-  res.redirect('/employee/how-to-contact-you');
+  res.redirect(`/${prefix}/employee/how-to-contact-you`);
 });
 
 router.post('/employee/how-to-contact-you', function (req, res) {
   if (req.body.version === 'a') {
-    res.redirect('/employee/your-employer-details');
+    res.redirect(`/${prefix}/employee/your-employer-details`);
   } else {
-    res.redirect('/employee/confirm-your-details');
+    res.redirect(`/${prefix}/employee/confirm-your-details`);
   }
 });
 
 router.post('/employee/your-employer-details', function (req, res) {
-  res.redirect('/employee/confirm-your-details');
+  res.redirect(`/${prefix}/employee/confirm-your-details`);
 });
 
 router.post('/employee/confirm-your-details', function (req, res) {
-  res.redirect('/employee/thank-you');
+  res.redirect(`/${prefix}/employee/thank-you`);
 });
 
 router.post('/gov/start', function (req, res) {
@@ -64,11 +65,11 @@ function redirect(req, res, path) {
   const choice = req.body['how-to-enter-staff-details'];
   if (choice === 'manually') {
     res.redirect(url.format({
-      pathname: `/${path}/enter-staff-details`,
+      pathname: `/${prefix}/${path}/enter-staff-details`,
       query: req.query
     }));
   } else if (choice === 'bulk-upload') {
-    res.redirect(`/${path}/bulk-upload?back=/${path}/start`);
+    res.redirect(`/${prefix}/${path}/bulk-upload?back=/${path}/start`);
   } else {
     res.status(400).send();
   }
@@ -76,12 +77,12 @@ function redirect(req, res, path) {
 
 router.get('/gov/:page', function (req, res) {
   const showB = req.query.version === 'b';
-  res.render(`gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
+  res.render(`${prefix}/gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
 });
 
 router.get('/sfc/:page', function (req, res) {
   const showB = req.query.version === 'b';
-  res.render(`sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
+  res.render(`${prefix}/sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
 });
 
 router.get('/download/staff-contact-details', function (req, res) {
