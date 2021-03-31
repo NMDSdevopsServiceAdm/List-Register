@@ -1,0 +1,330 @@
+
+.govuk-main-wrapper {
+  min-height: 420px;
+}
+
+  .govuk-header {
+    border-bottom: 4px solid #1d70b8;
+    /* Line 3 */
+
+    color: #0b0c0c;
+    background: #ffffff;
+  }
+
+  .govuk-header::after {
+    content: ' ';
+    border-bottom: 4px solid #28A197;
+    width: 100%;
+    position: relative;
+    top: 10px;
+    display: block;   
+  }
+
+  .govuk-header .govuk-header__container {
+    position: static;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    border-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+  .govuk-header .govuk-header__link {
+    text-decoration: none;
+    font-weight: 400;
+    text-decoration: underline;
+  }
+  .govuk-header .govuk-header__link:link, .govuk-header .govuk-header__link:visited {
+    color: #0b0c0c;
+  }
+  .govuk-header .govuk-header__link:focus {
+    outline: 3px solid transparent;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    text-decoration: none;
+  }
+  .govuk-header nav {
+    flex: 1;
+  }
+  .govuk-header .govuk-header__strapline {
+    display: inline-block;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1d70b8;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    padding: 5px 10px;
+  }
+.department-of-health-logo {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 0.9375rem;
+    letter-spacing: normal;
+  }
+  @media (min-width: 641px) {
+    .department-of-health-logo {
+      font-size: 1.125rem;
+      line-height: 1.25rem;
+    }
+  }
+  .department-of-health-logo .department-of-health-logo__crest {
+    text-transform: none;
+    text-decoration: none;
+    display: block;
+    color: #0b0c0c;
+    height: auto;
+    width: auto;
+    direction: ltr;
+    background: url("https://sfcstaging.cloudapps.digital/assets/images/govuk-crest.png") no-repeat 0.375rem 0;
+    background-size: auto 1.625rem;
+    background-image: url("https://sfcstaging.cloudapps.digital/assets/images/govuk-crest-2x.png");
+    border-left: 2px solid #0b0c0c;
+    padding-top: 1.25rem;
+    padding-left: 0.375rem;
+    border-color: #00ad93;
+  }
+  @media (min-width: 641px) {
+    .department-of-health-logo .department-of-health-logo__crest {
+      padding-top: 1.5625rem;
+      padding-left: 0.4375rem;
+    }
+  }
+  .department-of-health-logo .department-of-health-logo__crest .department-of-health-logo__name {
+    position: relative;
+    top: 0.1875rem;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  }
+.govuk-list--inline > li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .govuk-list--inline > li:last-child {
+    margin-right: 0;
+  }
+.govuk-footer {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 1.1428571429;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    border-top: 1px solid #b1b4b6;
+    color: #0b0c0c;
+    background: #f3f2f1;
+  }
+  .govuk-footer__link:link, .govuk-footer__link:visited, .govuk-footer__link:hover, .govuk-footer__link:active {
+    color: #0b0c0c;
+  }
+  .govuk-footer__link:focus {
+    outline: 3px solid transparent;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    text-decoration: none;
+  }
+  .govuk-footer__section-break {
+    margin: 0;
+    margin-bottom: 30px;
+    border: 0;
+    border-bottom: 1px solid #b1b4b6;
+  }
+  @media (min-width: 40.0625em) {
+    .govuk-footer__section-break {
+      margin-bottom: 50px;
+    }
+  }
+  .govuk-footer__meta {
+    justify-content: left;
+  }
+  .govuk-footer__meta-item {
+    margin-right: 0px;
+    margin-bottom: 25px;
+    margin-left: 0px;
+  }
+  .govuk-footer__meta-item--grow {
+    flex: 1;
+  }
+  @media (max-width: 40.0525em) {
+    .govuk-footer__meta-item--grow {
+      flex-basis: 320px;
+    }
+  }
+  .govuk-footer__licence-logo {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+  }
+  @media (max-width: 48.0525em) {
+    .govuk-footer__licence-logo {
+      margin-bottom: 15px;
+    }
+  }
+  .govuk-footer__licence-description {
+    display: inline-block;
+  }
+  .govuk-footer__copyright-logo {
+    display: inline-block;
+    min-width: 125px;
+    padding-top: 112px;
+    background-image: url("/assets/images/govuk-crest.png");
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+    background-size: 125px 102px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    .govuk-footer__copyright-logo {
+      background-image: url("/assets/images/govuk-crest-2x.png");
+    }
+  }
+  .govuk-footer__inline-list {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+  .govuk-footer__meta-custom {
+    margin-bottom: 20px;
+  }
+  .govuk-footer__inline-list-item {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 5px;
+  }
+  .govuk-footer__heading {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #b1b4b6;
+  }
+  @media (min-width: 40.0625em) {
+    .govuk-footer__heading {
+      margin-bottom: 40px;
+    }
+  }
+  @media (max-width: 40.0525em) {
+    .govuk-footer__heading {
+      padding-bottom: 10px;
+    }
+  }
+  .govuk-footer__navigation {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+  }
+  .govuk-footer__section {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    margin-left: 15px;
+    vertical-align: top;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  @media (max-width: 48.0525em) {
+    .govuk-footer__section {
+      flex-basis: 200px;
+    }
+  }
+  @media (min-width: 48.0625em) {
+    .govuk-footer__section:first-child:nth-last-child(2) {
+      flex-grow: 2;
+    }
+  }
+  .govuk-footer__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -moz-column-gap: 30px;
+         column-gap: 30px;
+  }
+  @media (min-width: 48.0625em) {
+    .govuk-footer__list--columns-2 {
+      -moz-column-count: 2;
+           column-count: 2;
+    }
+  
+    .govuk-footer__list--columns-3 {
+      -moz-column-count: 3;
+           column-count: 3;
+    }
+  }
+  .govuk-footer__list-item {
+    margin-bottom: 15px;
+  }
+  @media (min-width: 40.0625em) {
+    .govuk-footer__list-item {
+      margin-bottom: 20px;
+    }
+  }
+  .govuk-footer__list-item:last-child {
+    margin-bottom: 0;
+  }
+  .govuk-width-container .govuk-footer__meta-item--grow {
+    flex-basis: inherit;
+  }
+
+  footer .govuk-footer__meta {
+    padding: 0;
+    margin: 0;
+  }
+footer {
+    background: #ffffff;
+    border-top: 4px solid #1d70b8;
+    margin-top: 6.25rem;
+  }
+
+  footer::before {
+    content: ' ';
+    border-bottom: 4px solid #28A197;
+    width: 100%;
+    position: relative;
+    top: 2px;
+    display: block;   
+  }
+  
+  footer a.govuk-footer__link:link, footer a.govuk-footer__link:visited {
+    color: #1d70b8;
+  }
+  footer a.govuk-footer__link:hover, footer a.govuk-footer__link:active {
+    color: #1d70b8;
+  }
+  footer a.govuk-footer__link:focus {
+    outline: 3px solid transparent;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    text-decoration: none;
+  }
+  footer .govuk-width-container {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 25px;
+  }
+  footer .footer-tagline {
+    background: #1d70b8;
+    color: #ffffff;
+    position: absolute;
+    top: -1.0625rem;
+    padding: 0.375rem;
+    line-height: 1em;
+  }
+  @media (min-width: 40.0625em) {
+    footer .govuk-list {
+      text-align: right;
+      margin-bottom: 0;
+    }
+    footer .govuk-list > li {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-right: 40px;
+    }
+  }
