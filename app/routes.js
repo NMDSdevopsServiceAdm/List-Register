@@ -8,6 +8,34 @@ const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
 
+router.get('/care/start', function (req, res) {
+  req.session.data = {};
+  const hideHints = req.query.hideHints;
+  const email = req.query.email ?? 'name@email.com';
+  let path = 'care/start';
+  res.render(path, { hideHints, email, shortHeader: true })
+});
+
+router.post('/care/start', function (req, res) {
+  res.redirect('/care/add-your-details');
+});
+
+router.post('/care/add-your-details', function (req, res) {
+  res.redirect('/care/how-to-contact-you');
+});
+
+router.post('/care/how-to-contact-you', function (req, res) {
+  res.redirect('/care/confirm-your-details');
+});
+
+router.post('/care/your-employer-details', function (req, res) {
+  res.redirect('/care/confirm-your-details');
+});
+
+router.post('/care/confirm-your-details', function (req, res) {
+  res.redirect('/care/thank-you');
+});
+
 router.get('/employee/start', function (req, res) {
   req.session.data = {};
   const version = req.query.version;

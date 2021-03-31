@@ -1,0 +1,77 @@
+{% extends "layout_care.html" %}
+{% import "macros/sub-heading.html" as subHeading %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" novalidate>
+            <h1 class="govuk-heading-l">
+                Add your details
+            </h1>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="full-name">
+                    Full name
+                  </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="full-name" name="full-name" type="text" value="{{ data['full-name'] }}">
+            </div>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <label class="govuk-label" for="job-role">
+                        Main job role
+                    </label>
+                  </legend>
+                  <div id="contact-hint" class="govuk-hint">
+                    Select the type of work that most applies to you
+                  </div>
+                  <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                      {% set jobRoles = [{role: 'Care or support worker', hint: 'For example, Senior Carer'},{role: 'Management in care', hint: 'For example, Registered Manager'},{role: 'Admin and assistance staff', hint: 'For example, cleaner, back office'},{role: 'Social workers and specialist care role', hint: 'For example, OT or nurse'},{role: 'Personal assistant', hint: ''}] %}
+                      {% set i = 0 %}
+                      {% for job in jobRoles %}
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="job-role-{{ i }}" name="job-role" {% if job.role == data['job-role'] %}checked{% endif %} onclick="jobRoleClick(this)" type="radio" value="{{ job.role }}" data-index="{{ i }}" data-aria-controls="conditional-job-role-{{ i }}">
+                        <label class="govuk-label govuk-radios__label" for="job-role-{{ i }}">
+                          {{ job.role }}
+                        </label>
+                        {% if data['hide-hints'] != 'true' %}
+                        <div class="govuk-hint govuk-radios__hint">
+                            {{ job.hint }}
+                          </div>
+                          {% endif %}
+                      </div>
+                      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-job-role-{{ i }}">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label" for="job-title-{{ i }}">
+                            Enter your job title
+                          </label>
+                          <input class="govuk-input govuk-!-width-one-third" id="job-title-{{ i }}" value="{% if job.role == data['job-role'] %}{{ data['job-title'] }}{% endif %}" name="job-title" type="text" spellcheck="false" {% if job.role != data['job-role'] %}disabled{% endif %}></div>
+                      </div>
+                      {% set i = i + 1 %}
+                      {% endfor %}
+                  </div>
+              
+                </fieldset>
+              </div>
+
+              <script>
+                  function jobRoleClick(input) {
+                    for (var i = 0; i < 5; i++) {
+                        $(`#job-title-${i}`).prop('disabled', true);
+                    }
+
+                    $(`#job-title-${input.dataset.index}`).prop('disabled', false);
+                  }
+                  
+              </script>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

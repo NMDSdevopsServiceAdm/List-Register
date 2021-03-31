@@ -1,0 +1,135 @@
+{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
+{%- set assetPath = '/govuk/assets' -%}
+
+{% extends "govuk/template.njk" %}
+
+{% from "govuk/components/accordion/macro.njk"           import govukAccordion %}
+{% from "govuk/components/back-link/macro.njk"           import govukBackLink %}
+{% from "govuk/components/breadcrumbs/macro.njk"         import govukBreadcrumbs %}
+{% from "govuk/components/button/macro.njk"              import govukButton %}
+{% from "govuk/components/character-count/macro.njk"     import govukCharacterCount %}
+{% from "govuk/components/checkboxes/macro.njk"          import govukCheckboxes %}
+{% from "govuk/components/cookie-banner/macro.njk"       import govukCookieBanner %}
+{% from "govuk/components/date-input/macro.njk"          import govukDateInput %}
+{% from "govuk/components/details/macro.njk"             import govukDetails %}
+{% from "govuk/components/error-message/macro.njk"       import govukErrorMessage %}
+{% from "govuk/components/error-summary/macro.njk"       import govukErrorSummary %}
+{% from "govuk/components/fieldset/macro.njk"            import govukFieldset %}
+{% from "govuk/components/file-upload/macro.njk"         import govukFileUpload %}
+{% from "govuk/components/input/macro.njk"               import govukInput %}
+{% from "govuk/components/inset-text/macro.njk"          import govukInsetText %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+{% from "govuk/components/panel/macro.njk"               import govukPanel %}
+{% from "govuk/components/phase-banner/macro.njk"        import govukPhaseBanner %}
+{% from "govuk/components/radios/macro.njk"              import govukRadios %}
+{% from "govuk/components/select/macro.njk"              import govukSelect %}
+{% from "govuk/components/skip-link/macro.njk"           import govukSkipLink %}
+{% from "govuk/components/summary-list/macro.njk"        import govukSummaryList %}
+{% from "govuk/components/table/macro.njk"               import govukTable %}
+{% from "govuk/components/tabs/macro.njk"                import govukTabs %}
+{% from "govuk/components/tag/macro.njk"                 import govukTag %}
+{% from "govuk/components/textarea/macro.njk"            import govukTextarea %}
+{% from "govuk/components/warning-text/macro.njk"        import govukWarningText %}
+
+{% block head %}
+  {% include "includes/head_care.html" %}
+{% endblock %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  {# Set serviceName in config.js. #}
+  <header role="banner" data-module="header" class="govuk-header">
+    <div class="govuk-header__container govuk-width-container">
+      <div>
+        <img src="/public/images/care-logo.svg" alt="Care">
+      </div>
+      <div>
+        <a class="govuk-header__strapline" href="#">{% if shortHeader != true %}Join the{% endif %} Care Register</a>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
+
+{% if useAutoStoreData %}
+  {% block footer %}
+  <footer role="contentinfo">
+    <div class="govuk-width-container">
+      <div class="govuk-footer__meta">
+        <div class="govuk-footer__meta-item">
+          <div class="department-of-health-logo">
+            <div class="department-of-health-logo__crest">
+              <span class="department-of-health-logo__name"
+                >Department<br />of Health &amp;<br />Social Care</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="govuk-footer__meta-item">
+          <div>
+            <img src="https://sfcstaging.cloudapps.digital/assets/images/logo.png" alt="Skills for Care">
+          </div>
+        </div>
+      </div>
+        <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+          <ul class="govuk-footer__inline-list">
+                
+            <li class="govuk-footer__inline-list-item">
+              <a
+                class="govuk-footer__link"
+                ng-reflect-router-link="/cookie-policy"
+                href="/cookie-policy"
+                >Cookie policy</a
+              >
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a
+                class="govuk-footer__link"
+                ng-reflect-router-link="/contact-us"
+                href="/contact-us"
+                >Contact us</a
+              >
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a
+                class="govuk-footer__link"
+                ng-reflect-router-link="/accessibility-statement"
+                href="/accessibility-statement"
+                >Accessibility statement</a
+              >
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a
+                class="govuk-footer__link"
+                ng-reflect-router-link="/terms-and-conditions"
+                href="/terms-and-conditions"
+                >Terms and conditions</a
+              >
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a
+                class="govuk-footer__link"
+                ng-reflect-router-link="/privacy-notice"
+                href="/privacy-notice"
+                >Privacy notice</a
+              >
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+  </footer>
+  {% endblock %}
+{% endif %}
+
+{% block bodyEnd %}
+  {% block scripts %}
+    {% include "includes/scripts.html" %}
+    {% block pageScripts %}{% endblock %}
+  {% endblock %}
+  <!-- GOV.UK Prototype Kit {{releaseVersion}} -->
+{% endblock %}
