@@ -5,9 +5,9 @@
       <h1 class="govuk-heading-xl">
         Individually add staff contact details
       </h1>
-      <p>Enter an email address or mobile phone number for each member of staff to invite them to join the Adult Social Care Workforce Register (ASC-Workforce Register).</p>
+      <p>Enter an email address or mobile number for each member of staff to invite them to join the Care Register.</p>
       <p>
-        <a href="#">What is the ASC-Workforce Register?</a>
+        <a href="#">What is the Care Register?</a>
         <a href="{{ bulkUploadLink }}{{ { back: buBackLink } | appendQuery(query) }}" class="govuk-!-margin-left-8">Go to bulk upload</a>
       </p>
     </div>
@@ -94,17 +94,6 @@
           inputTd.parentNode.parentNode.replaceChild(detailsNode, inputTd.parentNode);
 
           const nameTd = document.getElementById(`contact-name-${button.dataset.index}`);
-
-          /*$.ajax({
-            type: "POST",
-            url: "/email/invite",
-            data: {
-              email: inputTd.value,
-              name: nameTd.innerText,
-              sfc
-            },
-            dataType: "application/json"
-          });*/
         }
 
         function onChange(button) {
