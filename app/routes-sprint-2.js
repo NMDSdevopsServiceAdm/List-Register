@@ -30,6 +30,10 @@ router.get('/employee/how-to-contact-you', function (req, res) {
   res.render(path, { serviceName })
 });
 
+router.get('/:path/:page', function (req, res) {
+  res.render(`${prefix}/${req.params.path}/${req.params.page}`, { serviceName })
+});
+
 router.post('/employee/start', function (req, res) {
   res.redirect(`/${prefix}/employee/add-your-details`);
 });
