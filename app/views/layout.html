@@ -40,7 +40,9 @@
 {% endblock %}
 
 {% block header %}
+  {% if serviceName == null %}
   {# Set serviceName in config.js. #}
+  {% endif %}
   {{ govukHeader({
     homepageUrl: "/",
     serviceName: serviceName,
