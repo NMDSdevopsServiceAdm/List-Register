@@ -1,9 +1,7 @@
 {% extends "layout_care.html" %}
 {% import "macros/sub-heading.html" as subHeading %}
 
-{% block pageTitle %}
-  Start page example
-{% endblock %}
+
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -16,7 +14,7 @@
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__value">
                     <p class="govuk-body govuk-!-font-weight-bold">Full name</p>
-                    <p class="govuk-body govuk-!-font-weight-bold">Job role level</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Main job role</p>
                     <p class="govuk-body govuk-!-font-weight-bold">Job title</p>
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -47,7 +45,7 @@
                 </dd>
             </div>
         </dl>
-        <h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-0">Are these details correct?</h2>
+        <h2 class="govuk-heading-m">Are these details correct?</h2>
     </div>
     <div class="govuk-grid-column-three-quarters govuk-!-margin-top-6">
         <form method="post" novalidate>

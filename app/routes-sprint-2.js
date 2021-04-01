@@ -7,7 +7,8 @@ const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
-const prefix = 'sprint-2'
+const prefix = 'sprint-2';
+const serviceName = 'Adult Social Care Workforce Register';
 
 router.get('/employee/start', function (req, res) {
   req.session.data = {};
@@ -18,7 +19,7 @@ router.get('/employee/start', function (req, res) {
   if (version === 'a') {
     path += '-version-a';
   }
-  res.render(path, { version, figma, email })
+  res.render(path, { version, figma, email, serviceName })
 });
 
 router.get('/employee/how-to-contact-you', function (req, res) {
@@ -26,7 +27,11 @@ router.get('/employee/how-to-contact-you', function (req, res) {
   if (req.session.data.version === 'b') {
     path += '-version-b';
   }
-  res.render(path)
+  res.render(path, { serviceName })
+});
+
+router.get('/:path/:page', function (req, res) {
+  res.render(`${prefix}/${req.params.path}/${req.params.page}`, { serviceName })
 });
 
 router.post('/employee/start', function (req, res) {
@@ -77,12 +82,12 @@ function redirect(req, res, path) {
 
 router.get('/gov/:page', function (req, res) {
   const showB = req.query.version === 'b';
-  res.render(`${prefix}/gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
+  res.render(`${prefix}/gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back, serviceName })
 });
 
 router.get('/sfc/:page', function (req, res) {
   const showB = req.query.version === 'b';
-  res.render(`${prefix}/sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back })
+  res.render(`${prefix}/sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, showB, back: req.query.back, serviceName })
 });
 
 router.get('/download/staff-contact-details', function (req, res) {

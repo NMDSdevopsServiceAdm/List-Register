@@ -6,15 +6,15 @@ const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 const csv = require('fast-csv');
 const data = require(path.join(__dirname, '/data', '/session-data-defaults.js'));
 const staff = data.staff.flat();
-const prefix = 'sprint-1'
+const prefix = 'sprint-1';
+const serviceName = 'Adult Social Care Workforce Register';
 
 router.get('/gov/:page', function (req, res) {
-  res.render(`${prefix}/gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+  res.render(`${prefix}/gov/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, serviceName })
 });
 
 router.get('/sfc/:page', function (req, res) {
-  console.log(__dirname);
-  res.render(`${prefix}/sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query })
+  res.render(`${prefix}/sfc/${req.params.page}`, { page: req.query.page, showBulkUpload: req.query.showBulkUpload && true, query: req.query, serviceName })
 });
 
 router.get('/download/staff-contact-details', function (req, res) {
