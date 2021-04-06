@@ -2,10 +2,8 @@
 {% import "macros/enter-staff-details.html" as enterStaffDetails %}
 {% import "macros/enter-staff-details-b.html" as enterStaffDetailsB %}
 
-
-
 {% block content %}
-{% if showB %}
+{% if data['option'] == '1' %}
 {{ enterStaffDetailsB.content(data, '/sfc/bulk-upload', query, true, '/sfc/start', '/sfc/enter-staff-details') }}
 {% else %}
 {{ enterStaffDetails.content(data, '/sfc/bulk-upload', query, true, '/sfc/start', '/sfc/enter-staff-details') }}

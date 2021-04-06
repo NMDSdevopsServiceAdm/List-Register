@@ -84,7 +84,7 @@ router.post('/gov/start', function (req, res) {
   redirect(req, res, 'gov');
 });
 
-router.post('/sfc/start', function (req, res) {
+router.post('/sfc/how-to-add-staff', function (req, res) {
   redirect(req, res, 'sfc');
 });
 
@@ -101,6 +101,15 @@ function redirect(req, res, path) {
     res.status(400).send();
   }
 }
+
+router.get('/sfc/sign-in', function (req, res) {
+  const option = req.query.option;
+  res.render('sfc/sign-in', { option });
+})
+
+router.post('/sfc/sign-in', function (req, res) {
+  res.redirect('/sfc/consent-to-share-data');
+})
 
 router.get('/gov/:page', function (req, res) {
   const showB = req.query.version === 'b';
