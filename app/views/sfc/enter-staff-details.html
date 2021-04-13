@@ -4,8 +4,8 @@
 
 {% block content %}
 {% if data['option'] == '1' %}
-{{ enterStaffDetailsB.content(data, '/sfc/bulk-upload', query, true, '/sfc/start', '/sfc/enter-staff-details') }}
+{{ enterStaffDetailsB.content(data, '/sfc/bulk-upload', query, true, '/sfc/how-to-add-staff', '/sfc/enter-staff-details') }}
 {% else %}
-{{ enterStaffDetails.content(data, '/sfc/bulk-upload', query, true, '/sfc/start', '/sfc/enter-staff-details') }}
+{{ enterStaffDetails.content(data, '/sfc/bulk-upload', query, true, '/sfc/how-to-add-staff', '/sfc/enter-staff-details') }}
 {% endif %}
 {% endblock %}
