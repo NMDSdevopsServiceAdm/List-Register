@@ -44,6 +44,20 @@
                 </a>
                 </dd>
             </div>
+            
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Contact for verification</p>                  
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['another-contact'] == 'email' %}{{ data['another-contact-by-email'] }}{% elseif data['another-contact'] == 'text' %}{{ data['another-contact-by-text'] }}{% else %}Neither, do not ask again{% endif %}</p> 
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/care/another-way-to-contact-you">
+                    Change<span class="govuk-visually-hidden"> contact details</span>
+                </a>
+                </dd>
+            </div>
         </dl>
         <h2 class="govuk-heading-m">Are these details correct?</h2>
     </div>
