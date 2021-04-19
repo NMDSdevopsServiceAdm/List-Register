@@ -25,10 +25,10 @@ router.post('/care/add-your-details', function (req, res) {
 });
 
 router.post('/care/how-to-contact-you', function (req, res) {
-  res.redirect('/care/confirm-your-details');
+  res.redirect('/care/another-way-to-contact-you');
 });
 
-router.post('/care/your-employer-details', function (req, res) {
+router.post('/care/another-way-to-contact-you', function (req, res) {
   res.redirect('/care/confirm-your-details');
 });
 
