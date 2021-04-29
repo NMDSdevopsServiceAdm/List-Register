@@ -58,6 +58,23 @@
                 </a>
                 </dd>
             </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Username</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Password</p>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['username'] == '' %}-{% else %}{{ data['username'] }}{% endif %}
+
+                    </p>
+                    <p class="govuk-body">************</p>
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/employee/username-password">
+                        Change
+                    </a>
+                </dd>
+            </div>
         </dl>
         <h2 class="govuk-heading-m">Are these details correct?</h2>
     </div>
