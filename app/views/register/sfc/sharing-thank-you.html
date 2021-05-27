@@ -1,0 +1,25 @@
+{% extends "layout_sfc.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">
+            Thank you for sharing this data
+        </h1>
+      </div>
+      <p class="govuk-body govuk-!-margin-top-6">
+        We have sent you a confirmation email with a link to your account in case you need to sign in again.
+      </p>
+      <h2 class="govuk-heading-m govuk-!-margin-top-6">Next step: add staff contact details</h2>
+  
+      <p class="govuk-body">
+        We will need you to provide an email address or mobile number for each member of staff, including yourself, so we can contact them. This data will only be used to invite them to join the Care Register.
+      </p>
+      <p class="govuk-body">
+        You will only need to do this once, for the people who are currently employed by you, and not for any subsequent new staff.
+      </p>
+      <a class="govuk-button govuk-!-margin-top-4" href="/register/sfc/how-to-add-staff">Add staff contact details</a>
+    </div>
+  </div>
+{% endblock %}

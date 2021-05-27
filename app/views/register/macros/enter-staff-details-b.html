@@ -1,0 +1,160 @@
+{% macro content(data, bulkUploadLink, query, sfc, backLink, buBackLink) %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <a href="{{ backLink }}" class="govuk-back-link" style="border-bottom: 0;">Back</a>
+      <h1 class="govuk-heading-xl">
+        Individually add staff contact details
+      </h1>
+      <p>Enter an email address or mobile number for each member of staff to invite them to join the Care Register.</p>
+      <p>
+        <a href="#">What is the Care Register?</a>
+        <a href="{{ bulkUploadLink }}{{ { back: buBackLink } | appendQuery(query) }}" class="govuk-!-margin-left-8">Go to bulk upload</a>
+      </p>
+    </div>
+    <div class="govuk-grid-column-full">
+      {% if not query.page %}
+      {% set page = 1 %}
+      {% else %}
+      {% set page = query.page %}
+      {% endif %}
+      {% set index = 1 %}
+      {% for staff in (data['staffB'][page]) %}
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Name/ID number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ staff['name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Job role
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ staff['title'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Email or mobile number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <input id="contact-email-{{ index }}" class="govuk-input" type="text">
+            </dd>
+            <dd class="govuk-summary-list__actions" style="text-align: left">
+              <button class="govuk-button govuk-!-margin-bottom-0" style="top: -8px" data-index="{{ index }}" onclick="onClick(this)">
+                Send invite
+              </button>
+            </dd>
+          </div>
+        </dl>
+        {% set index = index + 1 %}
+      {% endfor %}
+      {% if sfc %}
+      <script>
+        const sfc = true;
+      </script>
+      {% else %}
+      <script>
+        const sfc = false;
+      </script>
+      {% endif %}
+      <template id="input-template">
+        <dd class="govuk-summary-list__value">
+          <input class="govuk-input" type="text">
+        </dd>
+      </template>
+      <template id="send-template">
+        <dd class="govuk-summary-list__actions" style="text-align: left">
+          <button class="govuk-button govuk-!-margin-bottom-0" data-index="" onclick="onClick(this)">
+            Send invite
+          </button>
+        </dd>
+      </template>
+      <template id="change-template">
+        <dd class="govuk-summary-list__actions" style="text-align: left">
+          <a class="govuk-link" data-index="" onclick="onChange(this)" href="#">Change</a>
+        </dd>
+      </template>
+      <template id="details-template">
+        <dd class="govuk-summary-list__value">
+          <span id=""></span>
+        </dd>
+      </template>
+      <script>
+        function onClick(button) {
+          const changeTemplate = document.getElementById("change-template");
+          const changeNode = document.importNode(changeTemplate.content, true);
+          changeNode.querySelector('a').dataset.index = button.dataset.index;
+          button.parentNode.parentNode.replaceChild(changeNode, button.parentNode);
+
+          const inputTd = document.getElementById(`contact-email-${button.dataset.index}`);
+          const detailsTemplate = document.getElementById("details-template");
+          const detailsNode = document.importNode(detailsTemplate.content, true);
+          const item = detailsNode.querySelector('span');
+          item.id = `contact-email-${button.dataset.index}`
+          item.textContent = inputTd.value;
+          inputTd.parentNode.parentNode.replaceChild(detailsNode, inputTd.parentNode);
+
+          const nameTd = document.getElementById(`contact-name-${button.dataset.index}`);
+        }
+
+        function onChange(button) {
+          const sendTemplate = document.getElementById("send-template");
+          const sendNode = document.importNode(sendTemplate.content, true);
+          sendNode.querySelector('button').dataset.index = button.dataset.index;
+          button.parentNode.parentNode.replaceChild(sendNode, button.parentNode);
+
+          const inputTd = document.getElementById(`contact-email-${button.dataset.index}`);
+          const inputTemplate = document.getElementById("input-template");
+          const inputNode = document.importNode(inputTemplate.content, true);
+          const item = inputNode.querySelector('input');
+          item.id = `contact-email-${button.dataset.index}`
+          item.value = inputTd.textContent;
+          inputTd.parentNode.parentNode.replaceChild(inputNode, inputTd.parentNode);
+        }
+
+        function onDelete(button) {
+          button.parentNode.parentNode.remove();
+        }
+      </script>
+      <nav class="moj-pagination" id="pagination-label">
+        <p class="moj-pagination__results">Showing <b>{{ 6 * (page - 1) + 1 }} - {{ 6 * (page - 1) + 6 }}</b> of <b>204</b></p>
+        
+        <ul class="moj-pagination__list">
+          {% if page > 1 %}
+            <li class="moj-pagination__item moj-pagination__item--prev">
+              <a class="moj-pagination__link" href="{{ { page: +page - 1 } | appendQuery(query) }}">Previous page</a>
+            </li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 1 } | appendQuery(query) }}">1</a></li>
+          {% endif %}
+          {% if page > 3 %}
+            <li class="moj-pagination__item">...</li>
+          {% endif %}
+          {% if page > 2 %}
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page - 1 } | appendQuery(query) }}">{{ page - 1 }}</a></li>
+          {% endif %}
+            <li class="moj-pagination__item moj-pagination__item--active">{{ page }}</li>
+          {% if page < 34 %}
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">{{ +page + 1 }}</a></li>
+          {% endif %}
+          {% if page < 32 %}
+            <li class="moj-pagination__item">...</li>
+          {% endif %}
+          {% if page < 33 %}
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="{{ { page: 34 } | appendQuery(query) }}">34</a></li>
+          {% endif %}
+          {% if page < 34 %}
+            <li class="moj-pagination__item  moj-pagination__item--next">
+              <a class="moj-pagination__link" href="{{ { page: +page + 1 } | appendQuery(query) }}">Next page</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav> 
+    </div>
+</div>
+{% endmacro %}

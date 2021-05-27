@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% import "register/macros/enter-staff-details.html" as enterStaffDetails %}
+{% import "register/macros/enter-staff-details-b.html" as enterStaffDetailsB %}
+
+
+
+{% block content %}
+{% if showB %}
+{{ enterStaffDetailsB.content(data, '/register/gov/bulk-upload', query, true, '/register/gov/start', '/register/gov/enter-staff-details') }}
+{% else %}
+{{ enterStaffDetails.content(data, '/register/gov/bulk-upload', query, true, '/register/gov/start', '/register/gov/enter-staff-details') }}
+{% endif %}
+{% endblock %}

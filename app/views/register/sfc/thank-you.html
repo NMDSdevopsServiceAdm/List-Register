@@ -1,0 +1,10 @@
+{% extends "layout_sfc.html" %}
+{% import "register/macros/thank-you.html" as thankYou %}
+
+
+
+{% block content %}
+<a href="/" style="text-decoration: none;">
+{{ thankYou.content() }}
+</a>
+{% endblock %}
