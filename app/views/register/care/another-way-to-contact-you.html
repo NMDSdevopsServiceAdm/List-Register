@@ -1,0 +1,60 @@
+{% extends "layout_care.html" %}
+{% import "register/macros/sub-heading.html" as subHeading %}
+
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Add another way to access your account
+                    </h1>
+                    <p class="govuk-body govuk-!-margin-top-4">Why do we need this?</p>
+                    <p class="govuk-body">If you are unable to access the email address or mobile number previously provided this will allow us to send you a link so you can sign in to your account. </p>
+                  </legend>
+                  <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="another-contact" name="another-contact" type="radio" value="email" {% if data['another-contact'] == 'email' %}checked{% endif %} data-aria-controls="conditional-another-contact">
+                      <label class="govuk-label govuk-radios__label" for="another-contact">
+                          Email
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-another-contact">
+                        <div class="govuk-form-group">
+                            <input class="govuk-input govuk-!-width-one-half" id="another-contact-by-email" name="another-contact-by-email" type="email" value="{{ data['another-contact-by-email'] }}">
+                        </div>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="another-contact-3" name="another-contact" type="radio" value="text" {% if data['another-contact'] == 'text' %}checked{% endif %} data-aria-controls="conditional-another-contact-3">
+                      <label class="govuk-label govuk-radios__label" for="another-contact-3">
+                        Text message (SMS)
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-another-contact-3">
+                      <div class="govuk-form-group">
+                        <input class="govuk-input govuk-!-width-one-half" id="another-contact-by-text" name="another-contact-by-text" type="tel" value="{{ data['another-contact-by-text'] }}">
+                      </div>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="another-contact-4" name="another-contact" type="radio" value="neither" {% if data['another-contact'] == 'neither' %}checked{% endif %}>
+                        <label class="govuk-label govuk-radios__label" for="another-contact-4">
+                            Neither, do not ask again
+                        </label>
+                      </div>
+                  </div>
+                </fieldset>
+              </div>
+              {% if data['version'] == 'a' %}
+              <input type="hidden" name="version" value="a">
+              {% endif %}
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

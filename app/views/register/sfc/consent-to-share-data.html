@@ -1,0 +1,34 @@
+{% extends "layout_sfc.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Consent to share data with the Care Register</h1>
+        <h2 class="govuk-heading-m">What is the Care Register?</h2>
+        <p class="govuk-body">The register is a list of staff working in adult social care in England. It is run by Skills for Care, in partnership with the Department of Health and Social Care.</p>
+
+        <h2 class="govuk-heading-m">How does it work?</h2>
+        <p class="govuk-body">The register will provide a way for us to get in touch with the adult social care workforce so we can send them important messages and support improvement in the sector.</p>
+
+        <h2 class="govuk-heading-m">Who should be on the register?</h2>
+        <p class="govuk-body">All adult social care staff should join the register.</p>
+
+        <h2 class="govuk-heading-m">Data required</h2>
+        <p class="govuk-body">We need your permission to share the name, or ID number, and job role from the information you have recorded about your staff in the Adult Social Care Workforce Data Set.</p>
+        <form method="POST">
+            <div class="govuk-form-group govuk-!-margin-top-6">
+                <div class="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+                    <label class="govuk-label govuk-checkboxes__label" for="waste">
+                        I agree to share this data with the Care Register.
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <a class="govuk-button" href="/register/sfc/sharing-thank-you">Confirm</a>
+        </form>
+        <img src="/public/images/working-in-partnership.svg" >
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% import "register/macros/sub-heading.html" as subHeading %}
+
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+
+                    <span class="govuk-caption-l">{{ subHeading.content(data['version']) }}</span>
+                    <h1 class="govuk-fieldset__heading">
+                        How would you like us to contact you?
+                    </h1>
+                  </legend>
+                  <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="contact" name="contact" type="radio" value="email" {% if data['contact'] == 'email' %}checked{% endif %} data-aria-controls="conditional-contact">
+                      <label class="govuk-label govuk-radios__label" for="contact">
+                        Email
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact">
+                        <p class="govuk-body">You will need to be able to access to this email address to update your details in the future. <strong>You can change this email after you have joined the register.</strong></p>
+                        <p><strong>Continue with {{ data['contact-by-email'] }}</strong></p>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="contact-3" name="contact" type="radio" value="text" {% if data['contact'] == 'text' %}checked{% endif %} data-aria-controls="conditional-contact-3">
+                      <label class="govuk-label govuk-radios__label" for="contact-3">
+                        Text message (SMS)
+                      </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact-3">
+                      <div class="govuk-form-group">
+                        <label class="govuk-label" for="contact-by-text">
+                          Enter mobile number
+                        </label>
+                        <input class="govuk-input govuk-!-width-one-half" id="contact-by-text" name="contact-by-text" type="tel" value="{{ data['contact-by-text'] }}">
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              {% if data['version'] == 'a' %}
+              <input type="hidden" name="version" value="a">
+              {% endif %}
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

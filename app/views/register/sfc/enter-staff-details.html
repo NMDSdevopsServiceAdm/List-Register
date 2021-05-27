@@ -1,0 +1,11 @@
+{% extends "layout_sfc.html" %}
+{% import "register/macros/enter-staff-details.html" as enterStaffDetails %}
+{% import "register/macros/enter-staff-details-b.html" as enterStaffDetailsB %}
+
+{% block content %}
+{% if data['option'] == '1' %}
+{{ enterStaffDetailsB.content(data, '/register/sfc/bulk-upload', query, true, '/register/sfc/how-to-add-staff', '/register/sfc/enter-staff-details') }}
+{% else %}
+{{ enterStaffDetails.content(data, '/register/sfc/bulk-upload', query, true, '/register/sfc/how-to-add-staff', '/register/sfc/enter-staff-details') }}
+{% endif %}
+{% endblock %}

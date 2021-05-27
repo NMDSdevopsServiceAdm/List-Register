@@ -1,0 +1,119 @@
+{% extends "layout_care.html" %}
+{% import "register/macros/sub-heading.html" as subHeading %}
+
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            Confirm your details
+        </h1>
+                
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Full name</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Main job role</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Job title</p>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{ data['full-name'] }}</p>
+                    <p class="govuk-body">{{ data['job-role'] }}</p>
+                    <p class="govuk-body">{{ data['job-title'] }}</p>
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/register/care/add-your-details">
+                    Change
+                </a>
+                </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Preferred method of contact</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">{% if data['contact'] == 'email' %}Email{% else %}Mobile number{% endif %}</p>                    
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['contact'] == 'email' %}Email{% else %}Text message (SMS){% endif %}</p>
+                    <p class="govuk-body">{% if data['contact'] == 'email' %}{{ data['contact-by-email'] }}{% else %}{{ data['contact-by-text'] }}{% endif %}</p>                    
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/register/care/how-to-contact-you">
+                    Change<span class="govuk-visually-hidden"> contact details</span>
+                </a>
+                </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Contact for verification</p>                  
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['another-contact'] == 'email' %}{{ data['another-contact-by-email'] }}{% elseif data['another-contact'] == 'text' %}{{ data['another-contact-by-text'] }}{% else %}Neither, do not ask again{% endif %}</p> 
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/register/care/another-way-to-contact-you">
+                    Change<span class="govuk-visually-hidden"> contact details</span>
+                </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    <p class="govuk-body govuk-!-font-weight-bold">Username</p>
+                    <p class="govuk-body govuk-!-font-weight-bold">Password</p>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{% if data['username'] == '' %}-{% else %}{{ data['username'] }}{% endif %}
+
+                    </p>
+                    <p class="govuk-body">************</p>
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="/register/employee/username-password">
+                        Change
+                    </a>
+                </dd>
+            </div>
+        </dl>
+        <h2 class="govuk-heading-m">Are these details correct?</h2>
+    </div>
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-top-6">
+        <form method="post" novalidate>
+
+            <div class="govuk-form-group">
+                <h2 class="govuk-heading-m">Give consent</h2>
+                <div class="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+                    <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0">
+                        I agree to the Care Register using this data to send me information and to the <a href="#">terms and conditions</a> of this service. You must agree to these before you can join the register.
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <div class="govuk-form-group govuk-!-margin-top-6">
+                <h2 class="govuk-heading-m">Marketing consent</h2>
+                <p class="govuk-body">We may also use the register to send you marketing communications, including discounts you are eligible for as part of the adult social care workforce.
+                </p>
+                <div class="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+                    <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0" for="waste">
+                        I agree to the Care Register using this data to send me information for marketing purposes.
+                        <div class="govuk-hint">
+                            Optional
+                          </div>
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

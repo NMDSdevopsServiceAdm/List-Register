@@ -1,0 +1,30 @@
+{% extends "layout_sfc.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Sign in</h1>
+        <form method="POST">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="username">
+                  Username
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="username" type="text">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="password">
+                  Password
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="password" type="password">
+            </div>
+            <input type="hidden" name="option" value="{{ option }}">
+            <button class="govuk-button">Sign in</button>
+        </form>
+        <ul class="govuk-list">
+            <li><a class="govuk-link" href="#">Forgot your password?</a></li>
+            <li><a class="govuk-link" href="#">Create an account</a></li>
+        </ul>
+        
+    </div>
+</div>
+{% endblock %}
